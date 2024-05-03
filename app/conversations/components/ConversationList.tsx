@@ -21,6 +21,8 @@ const ConversationList: React.FC<ConversationListProps> = ({
 
     const { conversationId, isOpen } = useConversation();
 
+    console.log("isopen" + isOpen);
+
     return (
         <aside className={clsx(`
         fixed inset-y-0 pb-20 lg:pb-0 lg:left-20 lg:w-80 lg:block overflow-y-auto border-r border-gray-200

@@ -49,9 +49,9 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
             return false;
         }
 
-        return seenArray.filter((user) => user.email === userEmail).length != 0;
+        return seenArray.filter((user) => user.email === userEmail).length !== 0;
 
-    }, [lastMessage, userEmail]);
+    }, [userEmail, lastMessage]);
 
     const LastMessageText = useMemo(() => {
         if (lastMessage?.image) {
@@ -81,7 +81,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
                         </p>
                         {lastMessage?.createdAt && (
                             <p className="text-xs text-gray-400 font-light" >
-                                {format(new Date(), 'p')}
+                                {format(new Date(lastMessage.createdAt), 'p')}
                             </p>
                         )}
                     </div>
