@@ -7,7 +7,7 @@ import { Fragment, useMemo, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { IoClose, IoTrash } from 'react-icons/io5'
 import Avatar from "@/app/components/Avatar";
-import Modal from "@/app/components/Modal";
+import ConfirmModal from "./ConfirmModal";
 
 interface ProfileDrawerProps {
     isOpen: boolean;
@@ -23,7 +23,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
     data
 }) => {
     const otherUser = useOtherUser(data)
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [confirmOpen, setConfirmOpen] = useState(false)
 
     const JoinedDate = useMemo(() => {
         return format(new Date(otherUser.createdAt), 'PP')
@@ -44,14 +44,14 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
 
     return (
         <>
-            <Modal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
+            <ConfirmModal
+                isOpen={confirmOpen}
+                onClose={() => setConfirmOpen(false)}
             >
                 <div className="bg-white p-5">
                     <p>Hello modal</p>
                 </div>
-            </Modal>
+            </ConfirmModal>
             <Transition.Root show={isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-50" onClose={onClose} >
                     <Transition.Child
@@ -103,7 +103,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                     </div>
                                                     <div className="flex gap-10 my-8">
                                                         <div
-                                                            onClick={() => setIsModalOpen(true)}
+                                                            onClick={() => setConfirmOpen(true)}
                                                             className="flex flex-col items-center gap-3 cursor-pointer hover:opacity-75"
                                                         >
                                                             <div
@@ -129,12 +129,12 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                                     <div>
                                                                         <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0" >
                                                                             Joined
-                                                                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2" >
-                                                                                <time dateTime={JoinedDate}>
-                                                                                    {JoinedDate}
-                                                                                </time>
-                                                                            </dd>
                                                                         </dt>
+                                                                        <dd className="mt-1 text-sm text-gray-900 sm:col-span-2" >
+                                                                            <time dateTime={JoinedDate}>
+                                                                                {JoinedDate}
+                                                                            </time>
+                                                                        </dd>
                                                                     </div>
                                                                 </>
                                                             )}
