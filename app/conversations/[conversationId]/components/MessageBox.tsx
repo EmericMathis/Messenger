@@ -8,6 +8,8 @@ import { format } from "date-fns";
 import Image from "next/image";
 import { MdFactCheck } from "react-icons/md";
 import { FaCheck, FaCheckDouble } from 'react-icons/fa';
+import { useState } from "react";
+import ImageModal from "./ImageModal";
 
 
 
@@ -25,6 +27,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
     isLast
 }) => {
     const session = useSession();
+    const [imageModalOpen, setImageModalOpen] = useState(false);
 
     if (!data) {
         return null; // ou retourner un composant de chargement ou une autre chose
@@ -76,10 +79,15 @@ const MessageBox: React.FC<MessageBoxProps> = ({
                 </div>
                 <div className="flex items-end gap-1">
                     <div className={message} >
-
+                        <ImageModal
+                            src={data.image}
+                            isOpen={imageModalOpen}
+                            onClose={() => setImageModalOpen(false)}
+                        />
                         {/* image de profil envoyée si il y'en a une */}
                         {data.image ? (
                             <Image
+                                onClick={() => setImageModalOpen(true)}
                                 alt="image"
                                 height={288}
                                 width={288}
