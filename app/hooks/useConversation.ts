@@ -5,19 +5,20 @@ const useConversation = () => {
     const params = useParams()
 
     const conversationId = useMemo(() => {
-        if (!params.conversationId) {
+        // Ajoutez une vérification pour s'assurer que params n'est pas null
+        if (!params || !params.conversationId) {
             return ""
         }
 
         return params.conversationId as string;
-    }, [params?.conversationId])
+    }, [params])
 
     const isOpen = useMemo(() => !!conversationId, [conversationId])
 
     return useMemo(() => ({
         isOpen,
         conversationId
-    }), [isOpen, conversationId ])
-    }
+    }), [isOpen, conversationId])
+}
 
 export default useConversation
