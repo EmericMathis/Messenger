@@ -15,7 +15,7 @@ import Button from "../Button";
 interface SettingsModalProps {
     isOpen?: boolean;
     onClose: () => void;
-    currentUser: User;
+    currentUser: User | undefined; // Permettre à currentUser d'être undefined
 }
 
 const SettingsModal: React.FC<SettingsModalProps> = ({
